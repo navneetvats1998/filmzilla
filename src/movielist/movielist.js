@@ -60,7 +60,7 @@ const MovieList = () => {
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    
+    setCurrentPage(1);
   };
 
   const handleSearchSubmit = (e) => {
@@ -114,14 +114,14 @@ const MovieList = () => {
           </div>
         ))}
       </div>
-     { movies.length > 0 && <div   className="pagination">
+     { movies.length > 0  && <div   className="pagination">
         <button onClick={handlePrevPage} disabled={currentPage === 1}>
           Previous Page
         </button>
         <span className='pageNo'> Page {currentPage} </span>
-        <button onClick={handleNextPage}>Next Page</button>
+        <button onClick={handleNextPage} disabled={movies.length < 20}>Next Page</button>
       </div>}
-      { movies.length== 0 &&
+      { (!loading && movies.length==0) &&
         <div className='container found'>
         <span className='nofound' >No Movie Found</span> 
         </div>
